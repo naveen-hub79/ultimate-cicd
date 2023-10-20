@@ -56,7 +56,8 @@ pipeline {
                     git config user.email "naveen.xyz@gmail.com"
                     git config user.name "Naveen Chevulamaddi"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed "s|{{BUILD_NUMBER}}|${BUILD_NUMBER}|g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/template-deploy.yaml > deployment.yml
+                    cp java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/template-deploy.yaml java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
+                    sed -i "s|{{BUILD_NUMBER}}|${BUILD_NUMBER}|g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                     git add .
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
