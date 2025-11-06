@@ -1,5 +1,9 @@
 pipeline {
   agent any
+    tools {
+    maven "mvn"  // The exact name you set in global tools
+    jdk "jdk17"     // Make sure this points to Java 17 JDK in Jenkins global config
+  }
   stages {
     stage('Checkout') {
       steps {
